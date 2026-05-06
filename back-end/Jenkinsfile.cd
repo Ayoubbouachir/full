@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build & Push Docker Image') {
+            steps {
+                dir('back-end') {
+                    echo 'Building Backend Docker image...'
+                    script {
+                        docker.withRegistry('', 'docker-hub-creds') {
+                            def customImage = docker.build("salimhz/fullstakers-backend:latest")
+                            customImage.push()
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    echo 'Deploying Backend to Kubernetes cluster...'
+                    withCredentials([file(credentialsId: 'k8s-config', variable: 'KUBECONFIG')]) {
+                        sh 'kubectl apply -f k8s/backend.yaml'
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,737 @@
+/* Plan Analysis — light white + orange theme */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+.plan-page {
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    background: #f5f5f5;
+    color: #1a1a2e;
+    padding: 0 0 5rem;
+}
+
+.plan-blob {
+    display: none;
+}
+
+/* no blobs in light mode */
+
+.plan-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+}
+
+/* ─── Breadcrumb ─────────────────────────── */
+.plan-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 0 0;
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.plan-breadcrumb a {
+    color: #ff6200;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.plan-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* ─── Hero ───────────────────────────────── */
+.plan-header {
+    margin-bottom: 2rem;
+}
+
+.plan-hero {
+    padding: 2rem 0 0.5rem;
+}
+
+.plan-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.08);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    margin-bottom: 1rem;
+}
+
+.plan-hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.025em;
+}
+
+.plan-hero p {
+    font-size: 1rem;
+    color: #6b7280;
+    max-width: 600px;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ─── Steps ──────────────────────────────── */
+.plan-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 1.5rem 0 2rem;
+}
+
+.plan-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.plan-step-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #d1d5db;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #9ca3af;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s;
+}
+
+.plan-step.active .plan-step-dot {
+    border-color: #2563eb;
+    background: rgba(37, 99, 235, 0.08);
+    color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.plan-step.done .plan-step-dot {
+    border-color: #16a34a;
+    background: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+}
+
+.plan-step span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #9ca3af;
+    white-space: nowrap;
+}
+
+.plan-step.active span {
+    color: #2563eb;
+}
+
+.plan-step.done span {
+    color: #16a34a;
+}
+
+.plan-step-line {
+    flex: 1;
+    min-width: 50px;
+    height: 2px;
+    background: #e5e7eb;
+    margin-bottom: 1.5rem;
+    transition: background 0.3s;
+}
+
+.plan-step-line.done {
+    background: rgba(22, 163, 74, 0.4);
+}
+
+/* ─── Alert ──────────────────────────────── */
+.plan-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.25rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.plan-alert-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+.plan-alert-warning {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+}
+
+.plan-alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0 0.25rem;
+}
+
+/* ─── Layout ─────────────────────────────── */
+.plan-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 860px) {
+    .plan-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─── Dropzone ───────────────────────────── */
+.plan-dropzone {
+    background: #fff;
+    border: 2px dashed #d1d5db;
+    border-radius: 14px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.plan-dropzone.dragging {
+    border-color: #2563eb;
+    background: rgba(37, 99, 235, 0.04);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    transform: scale(1.01);
+}
+
+.plan-dropzone.has-file {
+    border-style: solid;
+    border-color: rgba(22, 163, 74, 0.4);
+    background: #fff;
+    cursor: default;
+}
+
+.plan-drop-icon {
+    font-size: 3rem;
+}
+
+.plan-dropzone h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.plan-dropzone p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.plan-browse-btn {
+    background: none;
+    border: none;
+    color: #2563eb;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.plan-accept-types {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.plan-accept-types span {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.6rem;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    color: #6b7280;
+}
+
+/* File preview */
+.plan-file-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.plan-img-preview {
+    max-height: 200px;
+    max-width: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.plan-file-icon {
+    font-size: 3rem;
+}
+
+.plan-file-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.plan-file-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.plan-file-size {
+    font-size: 0.78rem;
+    color: #9ca3af;
+}
+
+.plan-file-remove {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    border-radius: 8px;
+    padding: 0.35rem 0.85rem;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.plan-file-remove:hover {
+    background: #fee2e2;
+}
+
+/* Analyzing */
+.plan-analyzing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.plan-analyzing-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid rgba(37, 99, 235, 0.15);
+    border-top-color: #2563eb;
+    animation: plan-spin 1.2s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes plan-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.plan-analyzing-inner {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 3px solid rgba(37, 99, 235, 0.1);
+    border-bottom-color: rgba(37, 99, 235, 0.4);
+    animation: plan-spin 1.8s linear infinite reverse;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.plan-analyzing h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.plan-analyzing p {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.plan-analysis-progress {
+    width: 240px;
+    height: 4px;
+    background: #f3f4f6;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.plan-analysis-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    border-radius: 2px;
+    animation: plan-progress 2.8s ease-out forwards;
+}
+
+@keyframes plan-progress {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 92%;
+    }
+}
+
+.plan-analysis-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    color: #9ca3af;
+    text-align: left;
+}
+
+.plan-analysis-steps .active {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+/* Analyze button */
+.plan-analyze-btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
+    transition: all 0.25s;
+}
+
+.plan-analyze-btn:hover:not(:disabled) {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+.plan-analyze-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* ─── Info card ──────────────────────────── */
+.plan-info-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.plan-info-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.plan-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.plan-info-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+    color: #374151;
+}
+
+.plan-info-list li span:first-child {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+}
+
+.plan-info-note {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 0.75rem;
+    font-size: 0.8rem;
+    color: #15803d;
+}
+
+/* ─── Result ─────────────────────────────── */
+.plan-result {
+    background: #fff;
+    border: 1px solid rgba(22, 163, 74, 0.25);
+    border-top: 4px solid #16a34a;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 16px rgba(22, 163, 74, 0.08);
+}
+
+.plan-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.plan-result-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #16a34a;
+    background: #f0fdf4;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid #bbf7d0;
+    margin-bottom: 0.5rem;
+}
+
+.plan-result-header h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0.25rem 0 0.4rem;
+    letter-spacing: -0.02em;
+}
+
+.plan-confidence {
+    font-size: 0.82rem;
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+.plan-result-id {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.plan-result-id span {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.plan-result-id code {
+    font-size: 0.82rem;
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.08);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid rgba(37, 99, 235, 0.15);
+}
+
+/* Metrics grid */
+.plan-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.plan-metric {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1.125rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.plan-metric:hover {
+    border-color: rgba(255, 98, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(255, 98, 0, 0.08);
+}
+
+.plan-metric.highlight {
+    background: rgba(255, 98, 0, 0.05);
+    border-color: rgba(255, 98, 0, 0.2);
+}
+
+.plan-metric-icon {
+    font-size: 1.4rem;
+}
+
+.plan-metric-value {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #111827;
+    letter-spacing: -0.02em;
+}
+
+.plan-metric.highlight .plan-metric-value {
+    color: #ff6200;
+    font-size: 1.4rem;
+}
+
+.plan-metric-label {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Rooms */
+.plan-rooms-section {
+    margin-bottom: 2rem;
+}
+
+.plan-rooms-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 1rem;
+}
+
+.plan-rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 0.75rem;
+}
+
+.plan-room-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    transition: all 0.2s;
+}
+
+.plan-room-card:hover {
+    border-color: rgba(37, 99, 235, 0.25);
+    background: rgba(37, 99, 235, 0.04);
+}
+
+.plan-room-icon {
+    font-size: 1.25rem;
+}
+
+.plan-room-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.plan-room-surface {
+    font-size: 0.78rem;
+    color: #9ca3af;
+}
+
+/* Result actions */
+.plan-result-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+.plan-proceed-btn {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: #ff6200;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255, 98, 0, 0.28);
+    transition: all 0.25s;
+    min-width: 220px;
+}
+
+.plan-proceed-btn:hover {
+    background: #e55700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.35);
+}
+
+.plan-new-btn {
+    padding: 1rem 1.5rem;
+    background: #fff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.plan-new-btn:hover {
+    background: #f9fafb;
+    border-color: #ff6200;
+    color: #ff6200;
+}

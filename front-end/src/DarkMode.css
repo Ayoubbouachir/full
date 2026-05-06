@@ -1,0 +1,274 @@
+/* Dark Mode Styles */
+[data-theme='dark'] {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border-color: #333;
+    --accent-color: #ff6200;
+}
+
+[data-theme='dark'] body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+[data-theme='dark'] .navbar,
+[data-theme='dark'] header,
+[data-theme='dark'] .header-section,
+[data-theme='dark'] .up-header-content {
+    background-color: #1a1a1a !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme='dark'] .nav-link,
+[data-theme='dark'] .navbar-brand,
+[data-theme='dark'] .header-info-content li,
+[data-theme='dark'] .header-social-content li a {
+    color: var(--text-color) !important;
+}
+
+[data-theme='dark'] .sub-menu {
+    background-color: #1e1e1e !important;
+    border: 1px solid var(--border-color);
+}
+
+[data-theme='dark'] .sub-menu li a {
+    color: var(--text-color) !important;
+}
+
+[data-theme='dark'] .footer-section,
+[data-theme='dark'] .footer-area {
+    background-color: #0a0a0a !important;
+}
+
+[data-theme='dark'] .card,
+[data-theme='dark'] .section-title h2,
+[data-theme='dark'] .single-blog-item,
+[data-theme='dark'] .single-product-item {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+}
+
+[data-theme='dark'] input,
+[data-theme='dark'] textarea,
+[data-theme='dark'] select {
+    background-color: #2a2a2a !important;
+    color: white !important;
+    border-color: #444 !important;
+}
+
+/* Specific component fixes */
+[data-theme='dark'] .at-container,
+[data-theme='dark'] .am-container,
+[data-theme='dark'] .atr-container {
+    background: #121212 !important;
+}
+
+[data-theme='dark'] .at-card,
+[data-theme='dark'] .am-card,
+[data-theme='dark'] .atr-card {
+    background: #1e1e1e !important;
+    border-color: #333 !important;
+    color: #eee !important;
+}
+
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6 {
+    color: white !important;
+}
+
+[data-theme='dark'] .text-secondary,
+[data-theme='dark'] .text-muted {
+    color: #aaa !important;
+}
+
+/* Admin specific fixes */
+[data-theme='dark'] .sidebar {
+    background-color: #1a1a1a !important;
+    border-right: 1px solid #333;
+}
+
+[data-theme='dark'] .sidebar .nav-links li a {
+    color: #ccc !important;
+}
+
+[data-theme='dark'] .sidebar .nav-links li a:hover {
+    background: #333 !important;
+}
+
+[data-theme='dark'] .home-section {
+    background-color: #121212 !important;
+}
+
+[data-theme='dark'] .home-content {
+    background-color: #1a1a1a !important;
+    border-bottom: 1px solid #333;
+}
+
+[data-theme='dark'] .notification-circle {
+    background-color: #333 !important;
+}
+
+[data-theme='dark'] .sms-box {
+    background-color: #1e1e1e !important;
+    border: 1px solid #444;
+    color: white;
+}
+
+[data-theme='dark'] .lang-text,
+[data-theme='dark'] .message-text,
+[data-theme='dark'] .Cameron {
+    color: white !important;
+}
+
+/* AI Features & Reports Dark Mode */
+[data-theme='dark'] .pvr-page,
+[data-theme='dark'] .ai-features-page,
+[data-theme='dark'] .plan-page,
+[data-theme='dark'] .reports-dashboard {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+[data-theme='dark'] .pvr-section,
+[data-theme='dark'] .reports-filters,
+[data-theme='dark'] .reports-kpis,
+[data-theme='dark'] .reports-chart-card,
+[data-theme='dark'] .reports-ai-card,
+[data-theme='dark'] .reports-export,
+[data-theme='dark'] .plan-info-card,
+[data-theme='dark'] .plan-dropzone,
+[data-theme='dark'] .plan-result,
+[data-theme='dark'] .plan-metric,
+[data-theme='dark'] .plan-room-card,
+[data-theme='dark'] .ai-card,
+[data-theme='dark'] .ai-result,
+[data-theme='dark'] .ai-product-row,
+[data-theme='dark'] .ai-how {
+    background-color: #1e1e1e !important;
+    border-color: #333 !important;
+    color: #e0e0e0 !important;
+}
+
+[data-theme='dark'] .pvr-kpi-card,
+[data-theme='dark'] .pvr-invoice-table-wrap,
+[data-theme='dark'] .pvr-invoice-table th {
+    background-color: #252525 !important;
+    border-color: #333 !important;
+    color: #e0e0e0 !important;
+}
+
+[data-theme='dark'] .pvr-invoice-table td,
+[data-theme='dark'] .pvr-invoice-table tfoot td {
+    border-top-color: #333 !important;
+    color: #ccc !important;
+}
+
+[data-theme='dark'] .pvr-tab {
+    color: #888 !important;
+}
+
+[data-theme='dark'] .pvr-tab.active {
+    color: #ff6200 !important;
+}
+
+[data-theme='dark'] .pvr-label,
+[data-theme='dark'] .ai-label,
+[data-theme='dark'] .plan-metric-label {
+    color: #aaa !important;
+}
+
+[data-theme='dark'] .pvr-input,
+[data-theme='dark'] .ai-input,
+[data-theme='dark'] .plan-name-input {
+    background-color: #2a2a2a !important;
+    border-color: #444 !important;
+    color: #fff !important;
+}
+
+[data-theme='dark'] .pvr-hero h1,
+[data-theme='dark'] .pvr-kpi-value,
+[data-theme='dark'] .plan-hero h1,
+[data-theme='dark'] .plan-metric-value,
+[data-theme='dark'] .plan-room-name,
+[data-theme='dark'] .plan-dropzone h3,
+[data-theme='dark'] .plan-file-name,
+[data-theme='dark'] .ai-hero h1,
+[data-theme='dark'] .ai-card-title,
+[data-theme='dark'] .ai-product-row h5,
+[data-theme='dark'] .ai-how strong,
+[data-theme='dark'] .ai-result strong {
+    color: #fff !important;
+}
+
+[data-theme='dark'] .pvr-hero p,
+[data-theme='dark'] .pvr-kpi-label,
+[data-theme='dark'] .plan-hero p,
+[data-theme='dark'] .plan-confidence,
+[data-theme='dark'] .plan-room-surface,
+[data-theme='dark'] .plan-file-size,
+[data-theme='dark'] .ai-hero p,
+[data-theme='dark'] .ai-card-desc,
+[data-theme='dark'] .ai-how ol {
+    color: #999 !important;
+}
+
+[data-theme='dark'] .pvr-plan-info {
+    background-color: #2d1b0d !important;
+    color: #fbd38d !important;
+    border-left-color: #ff6200 !important;
+}
+
+[data-theme='dark'] .plan-step-dot {
+    background-color: #252525 !important;
+    border-color: #444 !important;
+    color: #777 !important;
+}
+
+[data-theme='dark'] .plan-step.active .plan-step-dot {
+    border-color: #2563eb !important;
+    background-color: rgba(37, 99, 235, 0.2) !important;
+    color: #60a5fa !important;
+}
+
+[data-theme='dark'] .plan-step.done .plan-step-dot {
+    border-color: #16a34a !important;
+    background-color: rgba(22, 163, 74, 0.2) !important;
+    color: #4ade80 !important;
+}
+
+[data-theme='dark'] .plan-analyzing-ring {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    border-top-color: #ff6200 !important;
+}
+
+[data-theme='dark'] .plan-analysis-progress {
+    background-color: #333 !important;
+}
+
+[data-theme='dark'] .ai-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #121212 100%) !important;
+    border-bottom-color: #333 !important;
+}
+
+[data-theme='dark'] .ai-total-box {
+    background-color: rgba(255, 98, 0, 0.1) !important;
+    border-color: rgba(255, 98, 0, 0.3) !important;
+}
+
+[data-theme='dark'] .ai-price-btn {
+    background-color: #252525 !important;
+    border-color: #333 !important;
+    color: #ccc !important;
+}
+
+[data-theme='dark'] .ai-price-btn:hover {
+    background-color: #333 !important;
+    border-color: #ff6200 !important;
+    color: #ff6200 !important;
+}

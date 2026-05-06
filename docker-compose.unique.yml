@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+
+  # ─── MongoDB V2 ───────────────────────────────────────────────
+  mongo-db-v2:
+    image: mongo:latest
+    container_name: fullstakers-v2-db
+    restart: unless-stopped
+    ports:
+      - "27019:27017" # Unique host port 27019
+    volumes:
+      - fullstakers-main_mongodb_data_v2:/data/db
+    networks:
+      - fullstakers-v2-net
+
+  # ─── Backend NestJS V2 ────────────────────────────────────────
+  backend-v2:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    container_name: fullstakers-v2-backend
+    restart: unless-stopped
+    ports:
+      - "3005:3000" # Unique host port 3005
+    environment:
+      - MONGO_URI=mongodb://mongo-db-v2:27017/fullstackers
+      - ML_SERVICE_URL=http://ml-service-v2:8000
+    depends_on:
+      - mongo-db-v2
+    networks:
+      - fullstakers-v2-net
+
+  # ─── Frontend React V2 ────────────────────────────────────────
+  frontend-v2:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    container_name: fullstakers-v2-frontend
+    restart: unless-stopped
+    ports:
+      - "3006:3001" # Unique host port 3006
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3001
+      - BROWSER=none
+      - WDS_SOCKET_PORT=3006
+      - WATCHPACK_POLLING=true
+      - DANGEROUSLY_DISABLE_HOST_CHECK=true
+    depends_on:
+      - backend-v2
+    networks:
+      - fullstakers-v2-net
+
+  # ─── ML Service V2 ──────────────────────────────────────────
+  ml-service-v2:
+    build:
+      context: ./ml-service
+      dockerfile: Dockerfile
+    container_name: fullstakers-v2-ml-service
+    restart: unless-stopped
+    ports:
+      - "8002:8000" # Unique host port 8002
+    networks:
+      - fullstakers-v2-net
+
+# ─── Volumes ────────────────────────────────────────────────
+volumes:
+  fullstakers-main_mongodb_data_v2:
+
+# ─── Réseau partagé ─────────────────────────────────────────
+networks:
+  fullstakers-v2-net:
+    driver: bridge

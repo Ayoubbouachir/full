@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'node18'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out Backend code...'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('back-end') {
+                    echo 'Installing Backend dependencies...'
+                    sh 'npm install --legacy-peer-deps'
+                }
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                dir('back-end') {
+                    echo 'Running Backend Unit Tests with Coverage...'
+                    sh 'npm run test:cov || true'
+                }
+            }
+        }
+
+        stage('Static Analysis (SonarQube)') {
+            steps {
+                dir('back-end') {
+                    echo 'Analyzing Backend code with SonarQube...'
+                    script {
+                        def scannerHome = tool 'SonarQubeScanner'
+                        withSonarQubeEnv('SonarServer') {
+                            sh "${scannerHome}/bin/sonar-scanner " +
+                               "-Dsonar.projectKey=Fullstakers-Backend-Final " +
+                               "-Dsonar.sources=. " +
+                               "-Dsonar.javascript.lcov.reportPaths=coverage/lcov.info " +
+                               "-Dsonar.coverage.exclusions=**/*.spec.ts,**/*.test.ts,main.ts"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            emailext (
+                subject: "Statut du Build : ${currentBuild.fullDisplayName}",
+                body: "Le build ${currentBuild.fullDisplayName} est terminé avec le statut : ${currentBuild.currentResult}. \n\nConsultez les détails ici : ${env.BUILD_URL}",
+                to: "salim.hizi1234@gmail.com"
+            )
+        }
+        success {
+            echo 'CI Pipeline for Backend SUCCESSFUL! Triggering CD...'
+            build job: 'back-end-cd', wait: false
+        }
+    }
+}

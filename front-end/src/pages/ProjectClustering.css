@@ -1,0 +1,128 @@
+/* Project Clustering — light white + orange */
+
+.clustering-page .clustering-card {
+  max-width: 900px;
+}
+
+.clustering-error {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.clustering-metrics {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.25rem 0;
+}
+
+.clustering-metrics .metric-box {
+  background: #fff;
+  border: 1px solid rgba(255, 98, 0, 0.2);
+  border-radius: 10px;
+  padding: 0.85rem 1.25rem;
+  min-width: 110px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(255, 98, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.clustering-metrics .metric-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 98, 0, 0.12);
+}
+
+.clustering-metrics .metric-label {
+  display: block;
+  font-size: 0.72rem;
+  color: #9ca3af;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.clustering-metrics .metric-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ff6200;
+}
+
+.clustering-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.clustering-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.clustering-table th,
+.clustering-table td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.clustering-table th {
+  background: #f9fafb;
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.clustering-table td {
+  color: #374151;
+}
+
+.clustering-table tbody tr:hover {
+  background: #fff8f5;
+}
+
+.insights-panel {
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-left: 4px solid #f59e0b;
+  border-radius: 10px;
+}
+
+.insights-panel h4 {
+  margin: 0 0 0.75rem;
+  color: #92400e;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.insights-panel p {
+  margin: 0.4rem 0;
+  font-size: 0.9rem;
+  color: #78350f;
+}
+
+.chart-wrap {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.chart-wrap h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: #111827;
+  font-weight: 700;
+}

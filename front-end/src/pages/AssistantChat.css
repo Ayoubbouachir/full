@@ -1,0 +1,25 @@
+.assistant-chat-page {
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.assistant-chat-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.assistant-chat-card {
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    background: #fff;
+    overflow: hidden;
+    margin-top: 20px;
+    border: none;
+    padding: 0; /* Let ChatAssistant handle padding */
+}
+
+/* Override potential AIFeatures.css card padding if needed */
+.assistant-chat-card .chat-container {
+    height: 600px;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; }
+        .header { background: linear-gradient(135deg, #ff6200 0%, #ff8800 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { padding: 30px; background-color: #ffffff; }
+        .footer { text-align: center; padding: 20px; font-size: 12px; color: #888; border-top: 1px solid #eee; }
+        .button { 
+            display: inline-block; 
+            padding: 15px 30px; 
+            background: #ff6200; 
+            color: white !important; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(255, 98, 0, 0.2);
+        }
+        .details { background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ff6200; }
+        .details h3 { margin-top: 0; color: #ff6200; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤝 Nouvelle Mission pour Vous</h1>
+        </div>
+        <div class="content">
+            <p>Bonjour <strong>{{artisanName}}</strong>,</p>
+            <p>Un ingénieur de la plateforme <strong>BMP Construction</strong> souhaite vous confier une mission spécifique sur le projet : <strong>{{projectName}}</strong>.</p>
+            
+            <div class="details">
+                <h3>Détails de la mission</h3>
+                <p><strong>Spécialité :</strong> {{category}}</p>
+                <p><strong>Description :</strong> {{description}}</p>
+                <p><strong>Budget Proposé :</strong> {{budget}} TND</p>
+            </div>
+
+            {{#if aiAdvice}}
+            <div class="details" style="border-left-color: #6366f1; background-color: #f5f3ff;">
+                <h3 style="color: #6366f1;">💡 Conseil de l'IA (Gemini)</h3>
+                <p style="font-style: italic;">"{{aiAdvice}}"</p>
+                <p style="font-size: 14px; margin-top: 10px;">Nous avons présélectionné pour vous <strong>{{recommendedCount}}</strong> produits pertinents dans notre marketplace pour cette mission.</p>
+            </div>
+            {{/if}}
+
+            <p>Cette mission correspond parfaitement à votre expertise. Veuillez cliquer sur le bouton ci-dessous pour voir les détails complets et donner votre réponse (Accepter / Refuser).</p>
+            
+            <div style="text-align: center;">
+                <a href="{{responseUrl}}" class="button">Voir la mission et Répondre</a>
+            </div>
+
+            <p style="margin-top: 30px; font-size: 14px; color: #666;">
+                Si le bouton ne s'affiche pas, vous pouvez copier-coller ce lien dans votre navigateur :<br>
+                <a href="{{responseUrl}}" style="color: #ff6200;">{{responseUrl}}</a>
+            </p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 BMP Construction Platform. Tous droits réservés.</p>
+            <p>Ceci est un message automatique, merci de ne pas y répondre.</p>
+        </div>
+    </div>
+</body>
+</html>

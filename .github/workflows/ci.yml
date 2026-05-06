@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "maram" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Récupération du code depuis GitHub
+      uses: actions/checkout@v4
+
+    - name: ⚙️ Configuration de Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    # ================= BACK-END =================
+    - name: 📦 Installation des dépendances Back-End
+      working-directory: ./back-end
+      run: npm ci || npm install
+
+    - name: 🛠️ Build du Back-End (Vérifie que NestJS compile sans erreur)
+      working-directory: ./back-end
+      run: npm run build
+
+    # ================= FRONT-END =================
+    - name: 📦 Installation des dépendances Front-End
+      working-directory: ./front-end
+      run: npm ci || npm install --legacy-peer-deps
+
+    - name: 🛠️ Build du Front-End (Vérifie que React compile sans erreur)
+      working-directory: ./front-end
+      run: CI=false npm run build
+
+    # ================= DOCKER =================
+    - name: 🐳 Test de construction des images Docker
+      run: docker compose build
+
+    # ================= SONARQUBE =================
+    - name: 📡 Analyse de sécurité SonarQube (SonarCloud)
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        # SonarQube a besoin de ces jetons secrets pour pouvoir lire et poster le rapport sur votre Repo
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    environment {
+        SONAR_TOKEN = credentials('sonar-token')
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: "Med-aziz-logtari",
+                url: "https://github.com/marambeji/fullstakers.git"
+            }
+        }
+
+        stage('Install Frontend') {
+            steps {
+                dir('front-end') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('front-end') {
+                    sh 'npm run test -- --coverage || true'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('front-end') {
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    dir('front-end') {
+                        sh """
+                        npx sonar-scanner \
+                        -Dsonar.projectKey=frontend \
+                        -Dsonar.sources=src \
+                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.login=$SONAR_TOKEN
+                        """
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            build job: 'frontend-cd'
+        }
+    }
+}

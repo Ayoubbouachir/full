@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.fullstakers</groupId>
+    <artifactId>fullstakers</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>Fullstakers</name>
+    <description>Fullstakers - Full Stack Application (React + NestJS)</description>
+
+    <properties>
+        <sonar.projectKey>fullstakers</sonar.projectKey>
+        <sonar.projectName>Fullstakers</sonar.projectName>
+        <sonar.sources>front-end/src,back-end/src</sonar.sources>
+        <sonar.exclusions>
+            **/node_modules/**,
+            **/build/**,
+            **/dist/**,
+            **/*.test.js,
+            **/*.spec.js
+        </sonar.exclusions>
+        <sonar.javascript.lcov.reportPaths>front-end/coverage/lcov.info</sonar.javascript.lcov.reportPaths>
+    </properties>
+
+</project>

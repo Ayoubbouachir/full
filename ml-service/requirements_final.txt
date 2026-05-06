@@ -1,0 +1,13 @@
+# requirements_final.txt
+# Installation : pip install -r requirements_final.txt
+# Python >= 3.10
+
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+torch>=2.2.0
+torchvision>=0.17.0
+pillow>=10.0.0
+python-multipart>=0.0.9
+pydantic>=2.0.0
+google-generativeai>=0.5.0
+

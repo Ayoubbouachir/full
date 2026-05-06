@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+openai-whisper
+httpx
+fuzzywuzzy
+python-Levenshtein
+python-multipart
+google-generativeai
+librosa
+pandas
+numpy
+
+xgboost
+scikit-learn

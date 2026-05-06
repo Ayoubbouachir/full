@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE = "medazizlogtari/backend"
+        CREDS = credentials('dockerhub-creds')
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: "Med-aziz-logtari",
+                url: "https://github.com/marambeji/fullstakers.git"
+            }
+        }
+
+       stage('Docker Login') {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+            sh '''
+            echo $PASS | docker login -u $USER --password-stdin
+            '''
+        }
+    }
+}
+        stage('Build Image') {
+            steps {
+                sh 'docker build -t $IMAGE ./back-end'
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                sh 'docker push $IMAGE'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f devops/k8s/backend.yaml'
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "chatbot": {
+    "welcome": "Bonjour! Je suis votre assistant IA. Comment puis-je vous aider aujourd'hui?",
+    "title": "Assistant IA",
+    "placeholder": "Tapez votre message...",
+    "added": "Ajouté au panier avec succès!",
+    "add": "Ajouter",
+    "error": "Désolé, j'ai rencontré une erreur. Veuillez réessayer."
+  }
+}

@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Model weights (large binary — store on Drive/HuggingFace Hub)
+construction_model.pth
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+*.log
+logs/
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+*.ipynb
+
+# Test artefacts
+dummy_test.jpg
+training_curves.png

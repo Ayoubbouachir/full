@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE = "yourdockerhub/frontend"
+        CREDS = credentials('dockerhub-creds')
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: "Med-aziz-logtari",
+                url: "https://github.com/marambeji/fullstakers.git"
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                sh """
+                echo $CREDS_PSW | docker login -u $CREDS_USR --password-stdin
+                """
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                sh 'docker build -t $IMAGE ./front-end'
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                sh 'docker push $IMAGE'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f devops/k8s/frontend.yaml'
+            }
+        }
+    }
+}

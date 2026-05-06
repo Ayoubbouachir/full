@@ -1,0 +1,51 @@
+# Logs
+*.log
+compose.log
+
+# Node.js
+node_modules/
+dist/
+/build
+
+# Python
+**/venv*/
+**/.venv*/
+**/.env
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Model weights & Large files
+**/*.pth
+**/*.h5
+**/*.onnx
+**/*.exe
+**/*.csv
+voice-api/ffmpeg.exe
+voice-api/models/cleaned_data.csv
+
+# ML Service specifics
+ml-service/data/
+ml-service/data_split/
+ml-service/rag_store/
+ml-service/training_curves.png
+
+# Scratch files (Contain secrets)
+**/scratch/
+backend_logs.txt
+
+# Environmental variables
+.env
+**/.env
+**/.env.*
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+integration_ms/

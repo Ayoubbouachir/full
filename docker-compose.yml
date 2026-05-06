@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+
+  # ─── MongoDB (Commented out: using host mongo) ───
+  # mongo-db:
+  #   image: mongo:6
+  #   container_name: mongo-db
+  #   restart: unless-stopped
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - fullstakers-main_mongodb_data:/data/db
+  #   networks:
+  #     - fullstakers-net
+
+  # ─── Backend NestJS ────────────────────────────────────────
+  backend:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    container_name: fullstakers-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./back-end/.env
+    environment:
+      - MONGO_URI=mongodb://host.docker.internal:27017/fullstackers
+      - PORT=3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # depends_on:
+    #   - mongo-db
+    networks:
+      - fullstakers-net
+
+  # ─── Frontend React ────────────────────────────────────────
+  frontend:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    container_name: fullstakers-frontend-app
+    restart: unless-stopped
+    ports:
+      - "3002:3001"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3001
+      - BROWSER=none
+      - WDS_SOCKET_PORT=3002
+      - WATCHPACK_POLLING=true
+      - DANGEROUSLY_DISABLE_HOST_CHECK=true
+    depends_on:
+      - backend
+    networks:
+      - fullstakers-net
+
+  # ─── Jenkins ───────────────────────────────────────────────
+  jenkins:
+    build:
+      context: ./jenkins-setup
+      dockerfile: Dockerfile.jenkins
+    user: root
+    privileged: true
+    restart: unless-stopped
+    ports:
+      - "8085:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /run/containerd/containerd.sock:/run/containerd/containerd.sock
+    networks:
+      - fullstakers-net
+
+  # ─── SonarQube ─────────────────────────────────────────────
+  sonarqube:
+    image: sonarqube:lts-community
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    networks:
+      - fullstakers-net
+
+# ─── Volumes ────────────────────────────────────────────────
+volumes:
+  fullstakers-main_mongodb_data:
+    external: true
+  jenkins_data:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+
+# ─── Réseau partagé ─────────────────────────────────────────
+networks:
+  fullstakers-net:
+    driver: bridge

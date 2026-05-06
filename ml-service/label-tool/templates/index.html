@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Construction Image Labeler</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────────────────────── -->
+<header>
+  <div class="header-left">
+    <span class="logo">🏗️ LabelTool</span>
+    <span class="subtitle">Construction Phase Classifier</span>
+  </div>
+  <div class="header-right">
+    <button id="btn-stats" onclick="toggleStats()">📊 Stats</button>
+  </div>
+</header>
+
+<!-- ── Stats panel (hidden by default) ─────────────────────────────────────── -->
+<div id="stats-panel" class="stats-panel hidden">
+  <h3>Per-class progress</h3>
+  <div id="stats-content">Loading...</div>
+</div>
+
+<!-- ── Main layout ──────────────────────────────────────────────────────────── -->
+<main>
+
+  <!-- Progress bar -->
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span id="lbl-position">— / —</span>
+      <span id="lbl-remaining"></span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- Image area -->
+  <div class="image-area" id="image-area">
+    <div class="image-wrap" id="image-wrap">
+      <img id="main-img" src="" alt="current image" draggable="false"/>
+      <div class="zoom-hint">Scroll to zoom · Click &amp; drag to pan</div>
+    </div>
+    <div id="done-screen" class="done-screen hidden">
+      <div class="done-icon">🎉</div>
+      <h2>All images classified!</h2>
+      <p id="done-stats"></p>
+      <button onclick="loadStats()">View breakdown</button>
+    </div>
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <!-- Filename -->
+  <div class="filename-bar">
+    <span id="lbl-filename">—</span>
+    <span id="lbl-labeled" class="badge"></span>
+    <span id="lbl-skipped" class="badge badge-gray"></span>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="actions">
+
+    <!-- Phase buttons -->
+    <div class="phase-buttons">
+      {% for cls in classes %}
+      <button
+        class="phase-btn"
+        id="btn-{{ cls }}"
+        data-phase="{{ cls }}"
+        onclick="labelImage('{{ cls }}')"
+        title="Keyboard: {{ loop.index }}"
+      >
+        <span class="key-hint">{{ loop.index }}</span>
+        <span class="phase-name">{{ cls.replace('_', ' ') }}</span>
+      </button>
+      {% endfor %}
+    </div>
+
+    <!-- Control buttons -->
+    <div class="control-buttons">
+      <button class="ctrl-btn" id="btn-undo" onclick="undoLast()" disabled>
+        ↩ Undo <span class="key-hint-sm">Z</span>
+      </button>
+      <button class="ctrl-btn" id="btn-skip" onclick="skipImage()">
+        ⏭ Skip <span class="key-hint-sm">S</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Keyboard legend -->
+  <div class="legend">
+    <b>Keyboard:</b>
+    1–5 = assign phase &nbsp;|&nbsp;
+    S = skip &nbsp;|&nbsp;
+    Z = undo &nbsp;|&nbsp;
+    scroll = zoom &nbsp;|&nbsp;
+    drag = pan
+  </div>
+
+</main>
+
+<!-- ── Toast notification ───────────────────────────────────────────────────── -->
+<div id="toast" class="toast"></div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────────────────────
+let busy    = false;
+let zoomVal = 1;
+let panX = 0, panY = 0;
+let isPanning = false, startX = 0, startY = 0;
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+window.addEventListener("DOMContentLoaded", () => {
+  refreshStatus();
+  setupZoomPan();
+});
+
+// ── API calls ─────────────────────────────────────────────────────────────────
+async function api(path, method = "GET", body = null) {
+  const opts = { method, headers: {"Content-Type": "application/json"} };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(path, opts);
+  return r.json();
+}
+
+async function refreshStatus() {
+  showLoading(true);
+  const s = await api("/api/status");
+  showLoading(false);
+
+  if (s.done) {
+    showDone(s);
+    return;
+  }
+
+  document.getElementById("lbl-filename").textContent  = s.filename;
+  document.getElementById("lbl-position").textContent  = `Image ${s.position} / ${s.total}`;
+  document.getElementById("lbl-remaining").textContent = `${s.remaining} remaining`;
+  document.getElementById("lbl-labeled").textContent   = `${s.labeled} labeled`;
+  document.getElementById("lbl-skipped").textContent   = `${s.skipped} skipped`;
+  document.getElementById("btn-undo").disabled         = !s.can_undo;
+
+  const pct = Math.round((s.position / s.total) * 100);
+  document.getElementById("progress-bar").style.width = pct + "%";
+
+  loadImage();
+}
+
+function loadImage() {
+  const img = document.getElementById("main-img");
+  resetZoom();
+  img.src = "/api/image?" + Date.now();   // cache-bust
+}
+
+async function labelImage(phase) {
+  if (busy) return;
+  busy = true;
+  flashBtn(phase);
+  const r = await api("/api/label", "POST", { phase });
+  busy = false;
+  if (r.error) { showToast("Error: " + r.error, "error"); return; }
+  showToast("Labeled: " + phase.replace("_", " "), "success");
+  await refreshStatus();
+}
+
+async function skipImage() {
+  if (busy) return;
+  busy = true;
+  const r = await api("/api/skip", "POST");
+  busy = false;
+  if (r.error) { showToast("Error: " + r.error, "error"); return; }
+  showToast("Skipped", "info");
+  await refreshStatus();
+}
+
+async function undoLast() {
+  if (busy) return;
+  busy = true;
+  const r = await api("/api/undo", "POST");
+  busy = false;
+  if (r.error) { showToast("Nothing to undo", "error"); return; }
+  showToast("Undone: " + r.restored, "info");
+  await refreshStatus();
+}
+
+async function loadStats() {
+  const s = await api("/api/stats");
+  const el = document.getElementById("stats-content");
+  let html = `<div class="stats-grid">`;
+  const phases = ["terrassement","fondation","structure","second_oeuvre","finition"];
+  phases.forEach(p => {
+    const count = s.breakdown[p] || 0;
+    const pct   = s.labeled ? Math.round((count/s.labeled)*100) : 0;
+    html += `
+      <div class="stat-row">
+        <span class="stat-name">${p.replace("_"," ")}</span>
+        <div class="stat-track"><div class="stat-fill" style="width:${pct}%"></div></div>
+        <span class="stat-val">${count}</span>
+      </div>`;
+  });
+  html += `</div>
+    <p class="stats-summary">Total labeled: <b>${s.labeled}</b> &nbsp; Skipped: <b>${s.skipped}</b> &nbsp; Remaining: <b>${s.remaining}</b></p>`;
+  el.innerHTML = html;
+}
+
+function toggleStats() {
+  const p = document.getElementById("stats-panel");
+  p.classList.toggle("hidden");
+  if (!p.classList.contains("hidden")) loadStats();
+}
+
+// ── Keyboard shortcuts ────────────────────────────────────────────────────────
+const KEYS = {"1":"terrassement","2":"fondation","3":"structure","4":"second_oeuvre","5":"finition"};
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  if (KEYS[e.key])        labelImage(KEYS[e.key]);
+  if (e.key === "s" || e.key === "S") skipImage();
+  if ((e.key === "z" || e.key === "Z") && !e.ctrlKey) undoLast();
+});
+
+// ── Zoom & Pan ────────────────────────────────────────────────────────────────
+function setupZoomPan() {
+  const wrap = document.getElementById("image-wrap");
+
+  wrap.addEventListener("wheel", e => {
+    e.preventDefault();
+    zoomVal = Math.min(5, Math.max(1, zoomVal - e.deltaY * 0.001));
+    applyTransform();
+  }, { passive: false });
+
+  wrap.addEventListener("mousedown", e => {
+    if (zoomVal <= 1) return;
+    isPanning = true;
+    startX = e.clientX - panX;
+    startY = e.clientY - panY;
+    wrap.style.cursor = "grabbing";
+  });
+  document.addEventListener("mousemove", e => {
+    if (!isPanning) return;
+    panX = e.clientX - startX;
+    panY = e.clientY - startY;
+    applyTransform();
+  });
+  document.addEventListener("mouseup", () => {
+    isPanning = false;
+    document.getElementById("image-wrap").style.cursor = "zoom-in";
+  });
+}
+
+function applyTransform() {
+  document.getElementById("main-img").style.transform =
+    `scale(${zoomVal}) translate(${panX/zoomVal}px, ${panY/zoomVal}px)`;
+}
+
+function resetZoom() {
+  zoomVal = 1; panX = 0; panY = 0;
+  const img = document.getElementById("main-img");
+  if (img) img.style.transform = "";
+}
+
+// ── UI helpers ────────────────────────────────────────────────────────────────
+function showLoading(on) {
+  document.getElementById("loading-overlay").style.display = on ? "flex" : "none";
+}
+
+function showDone(s) {
+  document.getElementById("main-img").style.display  = "none";
+  document.getElementById("done-screen").classList.remove("hidden");
+  document.getElementById("done-stats").textContent  =
+    `${s.labeled} images labeled, ${s.skipped} skipped out of ${s.total} total.`;
+  loadStats();
+  document.getElementById("stats-panel").classList.remove("hidden");
+}
+
+function flashBtn(phase) {
+  const btn = document.getElementById("btn-" + phase);
+  if (!btn) return;
+  btn.classList.add("flash");
+  setTimeout(() => btn.classList.remove("flash"), 300);
+}
+
+function showToast(msg, type = "info") {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = `toast toast-${type} show`;
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove("show"), 2000);
+}
+</script>
+</body>
+</html>

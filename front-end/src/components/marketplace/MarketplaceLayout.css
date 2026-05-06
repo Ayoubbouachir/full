@@ -1,0 +1,139 @@
+/* Marketplace layout — dark premium, minimal */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+.mp-layout {
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0f0f12 0%, #1a1a22 35%, #15151c 100%);
+  color: #e8e6e3;
+}
+
+.mp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 15, 18, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.mp-header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mp-logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.mp-logo:hover {
+  color: #ff6b35;
+}
+
+.mp-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mp-nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: rgba(232, 230, 227, 0.8);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s, background 0.2s;
+}
+
+.mp-nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mp-nav-link.active {
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.12);
+}
+
+.mp-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mp-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mp-mobile-toggle span {
+  width: 22px;
+  height: 2px;
+  background: #e8e6e3;
+  border-radius: 1px;
+}
+
+@media (max-width: 768px) {
+  .mp-nav { display: none; }
+  .mp-mobile-toggle { display: flex; }
+  .mp-mobile-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .mp-mobile-link {
+    color: #e8e6e3;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+  .mp-mobile-link:hover {
+    background: rgba(255,255,255,0.06);
+  }
+}
+
+.mp-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.mp-action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mp-action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}

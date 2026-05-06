@@ -1,0 +1,40 @@
+name: Deploy Backend to Azure
+
+on:
+  push:
+    branches:
+      - final_integration
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'npm'
+        cache-dependency-path: './back-end/package-lock.json'
+
+    - name: Install dependencies
+      working-directory: ./back-end
+      run: npm install
+
+    - name: Build project
+      working-directory: ./back-end
+      run: npm run build
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: '{"clientId":"${{ secrets.AZUREAPPSERVICE_CLIENTID_32 }}", "clientSecret":"${{ secrets.AZUREAPPSERVICE_CLIENTSECRET }}", "subscriptionId":"${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}", "tenantId":"${{ secrets.AZUREAPPSERVICE_TENANTID_66 }}"}'
+
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'fullstakers-backend'
+        package: ./back-end

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🏗️ Construction Progress AI</title>
+  <meta name="description" content="AI-powered construction site progress detection. Upload a site photo and get instant phase and completion estimates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & tokens ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0d1117;
+      --surface:    #161b22;
+      --border:     #30363d;
+      --accent:     #f0a500;
+      --accent-dim: #f0a50022;
+      --green:      #3fb950;
+      --red:        #f85149;
+      --text:       #e6edf3;
+      --muted:      #8b949e;
+      --radius:     14px;
+      --shadow:     0 8px 32px rgba(0,0,0,.5);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* ── Header ──────────────────────────────────────────────────────────── */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #f0a500 0%, #ff6b35 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -.02em;
+    }
+    header p {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-top: .4rem;
+    }
+
+    /* ── Card ────────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    /* ── Drop zone ───────────────────────────────────────────────────────── */
+    #drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: calc(var(--radius) - 4px);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      position: relative;
+    }
+    #drop-zone:hover,
+    #drop-zone.dragover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+    #drop-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    #drop-zone .icon { font-size: 2.5rem; line-height: 1; }
+    #drop-zone .hint {
+      margin-top: .6rem;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    #drop-zone .hint strong { color: var(--accent); }
+
+    /* ── Preview ─────────────────────────────────────────────────────────── */
+    #preview-wrap { margin-top: 1.2rem; display: none; text-align: center; }
+    #preview-wrap img {
+      max-height: 200px;
+      border-radius: calc(var(--radius) - 4px);
+      border: 1px solid var(--border);
+      object-fit: cover;
+      width: 100%;
+    }
+
+    /* ── Button ──────────────────────────────────────────────────────────── */
+    #predict-btn {
+      margin-top: 1.4rem;
+      width: 100%;
+      padding: .85rem;
+      border: none;
+      border-radius: calc(var(--radius) - 4px);
+      background: linear-gradient(135deg, #f0a500, #ff6b35);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: .01em;
+      transition: opacity .2s, transform .15s;
+    }
+    #predict-btn:disabled { opacity: .5; cursor: not-allowed; }
+    #predict-btn:not(:disabled):hover { opacity: .92; transform: translateY(-1px); }
+
+    /* ── Spinner ─────────────────────────────────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: .5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Results ─────────────────────────────────────────────────────────── */
+    #result-box {
+      margin-top: 1.6rem;
+      display: none;
+      animation: fadeUp .35s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+      margin-bottom: 1.2rem;
+    }
+    .stat-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .9rem 1rem;
+    }
+    .stat-card .label {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+    .stat-card .value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-card .value.green { color: var(--green); }
+
+    /* progress bar */
+    .progress-wrap { margin-top: .4rem; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+    .progress-track {
+      height: 8px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #f0a500, #ff6b35);
+      transition: width .8s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* all scores */
+    .scores-title {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: .7rem;
+    }
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .45rem;
+    }
+    .score-name {
+      width: 130px;
+      font-size: .82rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .score-track {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .score-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: var(--accent);
+      transition: width .7s ease;
+    }
+    .score-fill.top { background: var(--green); }
+    .score-val {
+      width: 48px;
+      text-align: right;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    /* ── Error ───────────────────────────────────────────────────────────── */
+    #error-box {
+      margin-top: 1rem;
+      padding: .75rem 1rem;
+      border-radius: 8px;
+      background: rgba(248,81,73,.12);
+      border: 1px solid rgba(248,81,73,.35);
+      color: var(--red);
+      font-size: .88rem;
+      display: none;
+    }
+
+    /* ── API URL config ──────────────────────────────────────────────────── */
+    .api-config {
+      margin-bottom: 1.4rem;
+    }
+    .api-config label {
+      font-size: .8rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: .35rem;
+    }
+    .api-config input {
+      width: 100%;
+      padding: .55rem .75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: .85rem;
+      font-family: monospace;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .api-config input:focus { border-color: var(--accent); }
+
+    /* ── Footer ──────────────────────────────────────────────────────────── */
+    footer {
+      margin-top: 2.5rem;
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🏗️ Construction Progress AI</h1>
+    <p>Upload a site photo — get instant phase detection & completion estimate</p>
+  </header>
+
+  <div class="card">
+    <!-- API URL -->
+    <div class="api-config">
+      <label for="api-url">API Base URL</label>
+      <input id="api-url" type="text" value="http://localhost:8003" placeholder="https://your-app.onrender.com" />
+    </div>
+
+    <!-- Drop zone -->
+    <div id="drop-zone">
+      <input type="file" id="file-input" accept="image/*" />
+      <div class="icon">📷</div>
+      <p style="margin-top:.5rem;font-weight:500;">Drop image here</p>
+      <p class="hint">or <strong>click to browse</strong> — jpg, png, webp</p>
+    </div>
+
+    <!-- Preview -->
+    <div id="preview-wrap">
+      <img id="preview-img" alt="Selected site image" />
+    </div>
+
+    <!-- Predict button -->
+    <button id="predict-btn" disabled>Analyse Image</button>
+
+    <!-- Error -->
+    <div id="error-box"></div>
+
+    <!-- Results -->
+    <div id="result-box">
+      <div class="result-grid">
+        <div class="stat-card">
+          <div class="label">Phase</div>
+          <div class="value" id="res-phase">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Confidence</div>
+          <div class="value green" id="res-conf">—</div>
+        </div>
+      </div>
+
+      <div class="stat-card" style="margin-bottom:1.2rem;">
+        <div class="label">Progress</div>
+        <div class="value" id="res-progress">—</div>
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>0%</span><span>100%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scores-title">All Class Scores</div>
+      <div id="scores-list"></div>
+    </div>
+  </div>
+
+  <footer>Powered by ResNet18 · PyTorch · FastAPI</footer>
+
+  <script>
+    /* ── DOM refs ─────────────────────────────────────────────────────────── */
+    const dropZone    = document.getElementById('drop-zone');
+    const fileInput   = document.getElementById('file-input');
+    const previewWrap = document.getElementById('preview-wrap');
+    const previewImg  = document.getElementById('preview-img');
+    const predictBtn  = document.getElementById('predict-btn');
+    const errorBox    = document.getElementById('error-box');
+    const resultBox   = document.getElementById('result-box');
+    const apiUrlInput = document.getElementById('api-url');
+
+    let selectedFile = null;
+
+    /* ── File selection ───────────────────────────────────────────────────── */
+    fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
+
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', ()  => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const f = e.dataTransfer.files[0];
+      if (f) handleFile(f);
+    });
+
+    function handleFile(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        showError('Please select a valid image file.');
+        return;
+      }
+      selectedFile = file;
+      const url = URL.createObjectURL(file);
+      previewImg.src = url;
+      previewWrap.style.display = 'block';
+      predictBtn.disabled = false;
+      hideError();
+      resultBox.style.display = 'none';
+    }
+
+    /* ── Prediction ───────────────────────────────────────────────────────── */
+    predictBtn.addEventListener('click', async () => {
+      if (!selectedFile) return;
+
+      predictBtn.disabled = true;
+      predictBtn.innerHTML = '<span class="spinner"></span>Analysing…';
+      hideError();
+      resultBox.style.display = 'none';
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      const base = apiUrlInput.value.replace(/\/$/, '');
+
+      try {
+        const res  = await fetch(`${base}/predict`, { method: 'POST', body: formData });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showError(data.detail || `Server error ${res.status}`);
+          return;
+        }
+        showResults(data);
+      } catch (err) {
+        showError(`Network error: ${err.message}. Is the API running at ${base}?`);
+      } finally {
+        predictBtn.disabled = false;
+        predictBtn.textContent = 'Analyse Image';
+      }
+    });
+
+    /* ── Render results ───────────────────────────────────────────────────── */
+    function showResults(data) {
+      document.getElementById('res-phase').textContent    = formatPhase(data.phase);
+      document.getElementById('res-conf').textContent     = `${data.confidence}%`;
+      document.getElementById('res-progress').textContent = `${data.progress}%`;
+      document.getElementById('progress-bar').style.width = `${data.progress}%`;
+
+      const scoresList = document.getElementById('scores-list');
+      scoresList.innerHTML = '';
+
+      const sorted = Object.entries(data.all_scores).sort((a, b) => b[1] - a[1]);
+      const topClass = sorted[0][0];
+
+      sorted.forEach(([cls, pct]) => {
+        const isTop = cls === topClass;
+        scoresList.insertAdjacentHTML('beforeend', `
+          <div class="score-row">
+            <span class="score-name">${formatPhase(cls)}</span>
+            <div class="score-track">
+              <div class="score-fill ${isTop ? 'top' : ''}" style="width:${pct}%"></div>
+            </div>
+            <span class="score-val">${pct}%</span>
+          </div>
+        `);
+      });
+
+      resultBox.style.display = 'block';
+    }
+
+    function formatPhase(key) {
+      return key
+        .replace(/_/g, ' ')
+        .replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    /* ── Error helpers ────────────────────────────────────────────────────── */
+    function showError(msg) {
+      errorBox.textContent = `⚠️ ${msg}`;
+      errorBox.style.display = 'block';
+    }
+    function hideError() {
+      errorBox.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

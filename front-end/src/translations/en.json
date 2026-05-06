@@ -1,0 +1,10 @@
+{
+  "chatbot": {
+    "welcome": "Hello! I'm your AI assistant. How can I help you today?",
+    "title": "AI Assistant",
+    "placeholder": "Type your message...",
+    "added": "Added to cart successfully!",
+    "add": "Add",
+    "error": "Sorry, I encountered an error. Please try again."
+  }
+}

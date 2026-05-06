@@ -1,0 +1,28 @@
+.currency-switcher {
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.currency-select {
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    max-width: 100px;
+    outline: none;
+    transition: all 0.3s;
+    color: #333;
+}
+
+.currency-select:hover {
+    border-color: #f55e1a;
+}
+
+[dir="rtl"] .currency-switcher {
+    margin-left: 10px;
+    margin-right: 0;
+}

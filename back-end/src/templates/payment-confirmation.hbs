@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Confirmation de paiement</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+      .container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      .footer {
+        margin-top: 20px;
+        font-size: 0.8em;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <h2>Confirmez votre paiement</h2>
+      <p>Bonjour {{userName}},</p>
+      <p>Vous avez demandé à effectuer un paiement pour les articles suivants :</p>
+      <ul>
+        {{#each items}}
+          <li>{{nomP}} - {{prix}} USD (Quantité: {{quantity}})</li>
+        {{/each}}
+      </ul>
+      <p>Veuillez cliquer sur le bouton ci-dessous pour confirmer et procéder au
+        paiement sécurisé :</p>
+      <p>
+        <a href='{{confirmationUrl}}' class='button'>Confirmer le paiement</a>
+      </p>
+      <p>Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer
+        cet e-mail.</p>
+      <div class='footer'>
+        <p>Cordialement,<br />L'équipe FullStakers</p>
+      </div>
+    </div>
+  </body>
+</html>

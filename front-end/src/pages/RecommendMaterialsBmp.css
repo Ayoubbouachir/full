@@ -1,0 +1,307 @@
+/* 
+  RecommendMaterialsBmp.css — Unified Premium Design System
+  Optimized for Tunisian Construction Market
+*/
+
+:root {
+  --bmp-orange: #E85D26;
+  --bmp-orange-hover: #C94E1F;
+  --bmp-slate-900: #0F172A;
+  --bmp-slate-800: #1E293B;
+  --bmp-slate-600: #475569;
+  --bmp-slate-400: #94A3B8;
+  --bmp-slate-100: #F1F5F9;
+  --bmp-white: #FFFFFF;
+  --bmp-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --bmp-radius: 12px;
+}
+
+.ai-features-page {
+  background-color: #F8FAFC;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--bmp-slate-800);
+}
+
+/* ── Hero & Navigation ── */
+.ai-dash-hero {
+  padding: 2.5rem 0;
+}
+
+.ai-dash-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+  color: var(--bmp-slate-900);
+  margin-bottom: 0.5rem;
+}
+
+.ai-dash-hero p {
+  color: var(--bmp-slate-600);
+  font-size: 1.1rem;
+  max-width: 650px;
+}
+
+/* ── Cards & Containers ── */
+.bmp-card, .ai-dash-card {
+  background: var(--bmp-white);
+  border: 1px solid #E2E8F0;
+  border-radius: var(--bmp-radius);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--bmp-shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bmp-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--bmp-slate-100);
+  padding-bottom: 1rem;
+}
+
+.bmp-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--bmp-slate-900);
+}
+
+/* ── Form Inputs ── */
+.bmp-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.bmp-field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--bmp-slate-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.bmp-field input, .bmp-field select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  background: #F8FAFC;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.bmp-field input:focus, .bmp-field select:focus {
+  outline: none;
+  border-color: var(--bmp-orange);
+  box-shadow: 0 0 0 3px rgba(232, 93, 38, 0.1);
+  background: #fff;
+}
+
+/* ── Material Table - THE FIX ── */
+.ai-dash-table-wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #E2E8F0;
+  background: #fff;
+}
+
+.bmp-devis-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bmp-devis-table th {
+  background: #F8FAFC;
+  padding: 1.25rem 1rem;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  border-bottom: 2px solid #F1F5F9;
+}
+
+.bmp-devis-table td {
+  padding: 1.15rem 1rem;
+  border-bottom: 1px solid #F1F5F9;
+  font-size: 0.95rem;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.bmp-devis-table tr:hover td {
+  background-color: #FBFBFE;
+}
+
+/* Category Badges */
+.bmp-badge-cat {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.bmp-cat-structure { background: #EEF2FF; color: #4338CA; border: 1px solid #C7D2FE; }
+.bmp-cat-maconnerie { background: #FFF7ED; color: #C2410C; border: 1px solid #FFEDD5; }
+.bmp-cat-finition { background: #F0FDF4; color: #15803D; border: 1px solid #DCFCE7; }
+.bmp-cat-default { background: #F8FAFC; color: #64748B; border: 1px solid #E2E8F0; }
+
+/* Price Status */
+.bmp-price-verified {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #059669;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.bmp-qte-unit {
+  color: var(--bmp-slate-400);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.bmp-total-cell {
+  font-weight: 850 !important;
+  color: #0F172A !important;
+  font-size: 1rem !important;
+  white-space: nowrap;
+}
+
+
+.bmp-product-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+
+/* ── Buttons ── */
+.ai-dash-btn-primary, .bmp-btn-generate {
+  background: linear-gradient(135deg, var(--bmp-orange) 0%, var(--bmp-orange-hover) 100%);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(232, 93, 38, 0.25);
+}
+
+.ai-dash-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 93, 38, 0.35);
+}
+
+.ai-dash-btn-ghost {
+  background: transparent;
+  border: 1px solid #E2E8F0;
+  color: var(--bmp-slate-600);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ai-dash-btn-ghost:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+}
+
+/* ── Gantt Chart ── */
+.rmb-gantt-container {
+  margin-top: 1rem;
+}
+
+.rmb-gantt-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  height: 38px;
+}
+
+.rmb-gantt-label-col {
+  width: 220px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--bmp-slate-800);
+}
+
+.rmb-gantt-track {
+  flex: 1;
+  height: 100%;
+  background: #F1F5F9;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.rmb-gantt-bar {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rmb-gantt-bar:hover {
+  transform: scaleY(1.15);
+  filter: brightness(1.1);
+  z-index: 10;
+}
+
+.rmb-gantt-bar-label {
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* ── AI Agent ── */
+.bmp-ai-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center; z-index: 10000;
+}
+
+.bmp-ai-modal {
+  background: white;
+  padding: 3rem;
+  border-radius: 24px;
+  text-align: center;
+  max-width: 420px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.bmp-pulse-ai {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  animation: pulse-ring 2s infinite ease-in-out;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(232, 93, 38, 0.5)); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .ai-dash-hero h1 { font-size: 1.75rem; }
+  .bmp-fields-grid { grid-template-columns: 1fr 1fr; }
+  .rmb-gantt-label-col { width: 120px; font-size: 0.7rem; }
+}

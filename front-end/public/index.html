@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Merged Project</title>
+
+    <!--=== Admin Dashboard CSS ===-->
+    <link rel="icon" href="/assets/images/bmp.png" />
+    <link rel="stylesheet" href="/assets/css/swap.css" />
+    <!-- Bootstrap from Public is used, but we might need Admin specific CSS order. 
+         Loading Admin Style first, then Public. -->
+    <link rel="stylesheet" href="/assets/css/style.admin.css" />
+    <link rel="stylesheet" href="/assets/css/media_query.css" />
+
+    <!--=== Public Website CSS ===-->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/assets/css/icofont.min.css" />
+    <link rel="stylesheet" href="/assets/css/animate.min.css" />
+    <link rel="stylesheet" href="/assets/css/magnific-popup.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.public.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+    <!-- <link rel="stylesheet" href="../../demos/demos-style.css"> -->
+
+    <!-- Valid Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Leaflet Map CSS & JS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <!--=== Public Website Scripts ===-->
+    <!-- Using these as the base libraries -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/mobile-menu.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/wow.min.js"></script>
+    <script src="/assets/js/magnific-popup.min.js"></script>
+    <script src="/assets/js/counterup.min.js"></script>
+    <script src="/assets/js/waypoints.min.js"></script>
+    <script src="/assets/js/countdown.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <!--=== Admin Dashboard Scripts ===-->
+    <!-- Avoiding duplicate jquery/bootstrap -->
+    <!-- Removed dashborad.apexcharts.js - conflicts with react-apexcharts -->
+
+    <!-- Admin Inline Script -->
+    <script>
+      // This script was in the dashboard index.html for password visibility toggle
+      // We wrap it in a document ready to be safe, though inline usually runs immediately.
+      // However, we need to ensure this logic applies to elements dynamically created by React.
+      // Originally this was likely for static templates. In React, this should be a Component logic.
+      // But I will leave it here just in case some static parts rely on it or if it was efficiently global.
+      $(document).on("click", "#eye ,#eye1", function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $(this).parent().find("input");
+        if (input.attr("type") == "password") {
+          input.attr("type", "text");
+        } else {
+          input.attr("type", "password");
+        }
+      });
+    </script>
+  </body>
+</html>

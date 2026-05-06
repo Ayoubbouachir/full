@@ -1,0 +1,646 @@
+@media (max-width:1810px) {
+    .local {
+        font-size: 65px;
+        line-height: 90px;
+    }
+    .Already {
+        padding-top: 40px;
+    }
+}
+@media (max-width:1600px) {
+    .department-main {
+        flex-wrap: wrap;
+        padding: 16px 0 16px;
+    }
+    .department-box {
+        padding: 10px;
+    }
+    .card-main-sub {
+        padding: 0 20px 20px 20px;
+    }
+    .bg-login {
+        border-radius: 30px;
+        padding: 30px;
+    }
+    .local {
+        font-size: 60px;
+        line-height: 83px;
+    }
+    .button-link-main {
+        margin: 25px 0;
+    }
+    .form-login {
+        padding: 0 50px;
+    }
+    .or-section {
+        margin-bottom: 25px;
+    }
+}
+@media (max-width:1399px) {
+    .quote-text-thin {
+        max-width: 200px;
+        width: 100%;
+    }
+    .controls-cut {
+        gap: 12px;
+    }
+    #calendar {
+        width: 1500px;
+    }
+    .col-card {
+        width: 33.33%;
+    }
+    .month-day {
+        width: 140px;
+    }
+    button.dropdown-btn.assign2 {
+        width: 220px;
+    }
+    .add-New-staff {
+        padding: 12px 12px;
+    }
+    .form-login {
+        padding: 0;
+    }
+    .bg-login {
+        padding: 20px;
+    }
+    .local {
+        font-size: 50px;
+        line-height: 65px;
+    }
+    .Already {
+        padding-top: 30px;
+    }
+}
+@media (max-width:1320px) {
+    .layout-grid2 {
+        display: block;
+    }
+    .dropdown-asign-staff {
+        display: none;
+    }
+    button.dropdown-btn.assign2 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .searchQuotation-staff {
+        display: none;
+    }
+    .search-icons-main2 {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .controls-main-staff {
+        gap: 0;
+    }
+}
+@media (max-width:1200px) {
+    .Quotation-row {
+        margin-top: 24px;
+        gap: 30px 0;
+    }
+    .assign {
+        width: 190px;
+    }
+    #customer-datails-main {
+        position: unset;
+        margin-bottom: 30px;
+    }
+    .addNewStaff-footer {
+        width: calc(100% - 78px);
+        bottom: 0;
+        left: 78px;
+    }
+    .sidebar.close~.home-section .addNewStaff-footer {
+        left: 0;
+        width: 100%;
+    }
+    .sidebar.close .nav-links li .sub-menu {
+        display: none;
+    }
+    .sidebar .nav-links li .sub-menu {
+        padding: 15px 0 0 0;
+        display: block;
+        margin: 0;
+    }
+    .sidebar .nav-links {
+        margin: 0px 15px;
+    }
+    .sidebar .nav-links li a .link_name {
+        display: none;
+    }
+    .sidebar .nav-links li .sub-menu a {
+        width: 100%;
+        background: transparent;
+        height: 48px;
+    }
+    .sidebar .logo-details {
+        gap: 20px;
+    }
+    .sidebar {
+        width: 78px;
+    }
+    .sidebar.close {
+        width: 0;
+    }
+    .home-section {
+        left: 78px;
+        width: calc(100% - 78px);
+        z-index: 100;
+    }
+    .sidebar.close~.home-section {
+        width: 100%;
+        left: 0;
+    }
+    .login-main {
+        padding: 15px;
+    }
+    .bg-login {
+        height: calc(100vh - 30px);
+    }
+    .offer-free {
+        font-size: 20px;
+        line-height: 30px;
+        border-left: 7px solid #001489;
+        padding-left: 12px;
+    }
+    .allows {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .button-link-main {
+        gap: 15px;
+    }
+}
+@media (max-width:1050px) {
+    .controls-main {
+        padding: 12px;
+    }
+    .local {
+        font-size: 43px;
+        line-height: 58px;
+    }
+    .welcome-text {
+        font-size: 43px;
+        line-height: 58px;
+    }
+}
+@media (max-width:991px) {
+    .visitor-row {
+        padding-top: 18px;
+        gap: 35px 0;
+    }
+    .hover-box.female {
+        top: 30%;
+        left: 23%;
+    }
+    .hover-box.male {
+        bottom: 15%;
+        right: 24%;
+    }
+    .search-main input {
+        width: 100%;
+        max-width: 240px;
+    }
+    th,
+    td {
+        padding: 16px 10px;
+    }
+    .dashbord-body {
+        padding: 20px 15px;
+    }
+    .Quotation-row {
+        gap: 20px 0;
+    }
+    .notification-section {
+        gap: 12px;
+    }
+    .controls-main {
+        padding: 12px 12px;
+        margin-bottom: 20px;
+    }
+    .searchQuotation,
+    .dropdown-asign {
+        display: none;
+    }
+    .layout-grid,
+    .searchQuotation2 {
+        display: block;
+    }
+    .search-icons-hiden,
+    .select-showing-hide {
+        display: none;
+    }
+    .assign {
+        width: 100%;
+    }
+    .assign:nth-child(1) {
+        margin-bottom: 10px;
+    }
+    .quote-text {
+        max-width: 100%;
+        width: 100%;
+    }
+    .quote-text2 {
+        max-width: 250px;
+    }
+    .quote-text-thin {
+        max-width: 100%;
+        width: 100%;
+        text-align: right;
+    }
+    .box1 {
+        margin: 20px 0;
+    }
+    #customer-datails-main {
+        margin-bottom: 20px;
+    }
+    .center-box-full {
+        margin-left: 0;
+    }
+    .feel-free-touch {
+        display: none;
+    }
+    .buttons-main {
+        padding: 40px 40px 40px;
+    }
+    .progress-container {
+        margin: 25px 20px;
+    }
+    .menu-toggle-button {
+        display: block;
+    }
+    .phone-icon img {
+        width: 30px;
+    }
+    .phone-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .close-icon,
+    .hamburger {
+        filter: brightness(0) saturate(100%) invert(20%) sepia(90%) saturate(3934%) hue-rotate(256deg) brightness(95%) contrast(95%);
+    }
+    .hamburger {
+        display: block;
+    }
+    .close-icon {
+        display: none;
+    }
+    .menu-toggle-button {
+        border: none;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 8px;
+        background: rgba(111, 52, 236, 0.12);
+    }
+    .side-menu-container {
+        position: relative;
+    }
+    .side-menu2 {
+        position: fixed;
+        top: 0;
+        left: -450px;
+        width: 250px;
+        height: 100%;
+        transition: left 0.3s ease;
+        z-index: 600;
+        border-radius: 0;
+        overflow: auto;
+    }
+    .side-menu2.show {
+        left: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .hamburger:hover {
+        cursor: pointer;
+    }
+    .searchQuotation-email {
+        display: block;
+    }
+    .col-card {
+        width: 50%;
+    }
+    .card-main-sub {
+        padding: 0 12px 12px 12px;
+    }
+    .profile-div-main,
+    .form-flex {
+        gap: 12px;
+    }
+    .AddNewStaff-body {
+        padding-bottom: 70px;
+    }
+    .upload-button {
+        padding: 12px 12px;
+    }
+    #staff-bg {
+        border-radius: 0;
+    }
+    .bg-login {
+        display: none;
+    }
+    .login-row {
+        justify-content: center;
+    }
+    .form-login-col {
+        min-height: 100vh;
+    }
+    .welcome-text {
+        font-size: 40px;
+        line-height: 50px;
+    }
+    .button-link-main {
+        margin: 10px 0 20px 0;
+    }
+    .or-section {
+        margin-bottom: 15px;
+    }
+    .login-main {
+        position: unset;
+    }
+}
+@media (max-width:840px) {
+    .select-showing {
+        padding: 6px;
+        font-size: 16px;
+    }
+    .search-icons {
+        padding: 6px;
+    }
+    .select-showing-pop {
+        padding: 13px !important;
+    }
+    .js-btn-open,
+    .social ul li {
+        width: 38px;
+        height: 38px;
+    }
+    .email-header-box3 {
+        width: 70%;
+    }
+    .add-New-staff {
+        padding: 8px 8px;
+    }
+}
+@media (max-width:767px) {
+    .sms-box {
+        left: -100px;
+        width: 300px;
+    }
+    #notification-bing-show {
+        left: -100px;
+    }
+    .pagination-btn-main-line {
+        padding-top: 20px;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .remember2,
+    .email-hover-box,
+    .email-header-box .remember,
+    .email-header-box a,
+    .pagination-btn-email,
+    .email-pagination {
+        display: none;
+    }
+    .email-mail {
+        padding: 16px;
+    }
+    .email-header-box3 {
+        width: 30%;
+    }
+    .email-header {
+        padding: 12px;
+    }
+    .profile-div-main {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .form-flex-sub input {
+        padding: 8px 12px;
+    }
+    .form-flex {
+        padding-bottom: 15px;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .scope-list,
+    .customer-datails-scope {
+        padding: 12px 12px;
+    }
+    .login-main {
+        padding: 0 12px;
+    }
+}
+@media (max-width:700px) {
+    .col-card {
+        width: 90%;
+    }
+    .staff-row {
+        justify-content: center;
+    }
+}
+@media (max-width:670px) {
+    .search-main {
+        display: none;
+    }
+    .home-section .home-content {
+        justify-content: space-between;
+    }
+    .select-showing-hide {
+        display: none;
+    }
+    .controls {
+        gap: 8px;
+    }
+    .showing {
+        font-size: 15px;
+    }
+    .file-message {
+        display: none;
+    }
+    .nichols {
+        display: none;
+    }
+    .nichols2 {
+        max-width: 340px;
+    }
+    .staff-row {
+        gap: 15px 0;
+    }
+    .scope-box,
+    .ql-toolbar.ql-snow {
+        margin-bottom: 15px;
+    }
+    .conditions {
+        font-size: 20px;
+        line-height: 25px;
+    }
+}
+@media (max-width:575px) {
+    .hover-box {
+        width: 70px;
+        height: 70px;
+        font-size: 15px;
+    }
+    .hover-box.female {
+        top: 35%;
+        left: 12px;
+    }
+    .hover-box.male {
+        bottom: 9%;
+        right: 12px;
+    }
+    .hover-box span {
+        font-size: 15px;
+        line-height: 17px;
+    }
+    .Quotation-chart-box {
+        padding: 17px;
+    }
+    .quot-text {
+        font-size: 18px;
+    }
+    .visitor-total {
+        font-size: 25px;
+    }
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        margin-top: 15px;
+    }
+    footer {
+        flex-direction: column-reverse;
+        gap: 5px;
+        text-align: center;
+    }
+    #notification-bing-show {
+        left: -90px;
+    }
+    .sms-box {
+        left: -90px;
+        width: 300px;
+    }
+    .pagination-btn3 {
+        margin-right: 0px;
+    }
+    .search-icons-main {
+        gap: 8px;
+    }
+    .home-section .home-content {
+        padding: 12px 12px;
+    }
+    .notification-section {
+        gap: 8px;
+    }
+    .home-section .home-content .bx-menu {
+        margin-right: 0px;
+        cursor: pointer;
+    }
+    .pagination-btn-hide {
+        display: none;
+    }
+    .calendar-body {
+        padding: 0px;
+    }
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 0px;
+    }
+    .calendar {
+        top: 50px;
+    }
+    .calendar-days div {
+        width: 35px;
+        height: 35px;
+    }
+    .calendar-week-day div {
+        font-size: 14px;
+    }
+    .month-list>div>div {
+        padding: 5px 8px;
+        font-size: 14px;
+    }
+    .month-list {
+        padding: 4px;
+        gap: 3px;
+    }
+    .QuoteID,
+    .custom-back-btn span {
+        display: none;
+    }
+    .custom-back-btn {
+        padding: 8px;
+    }
+    .dashbord-body {
+        padding: 20px 12px;
+    }
+    footer {
+        padding: 12px;
+    }
+    .col-card {
+        width: 100%;
+    }
+    .profile-staff {
+        width: 80px;
+        height: 80px;
+        border: 2px solid #FFF;
+        margin-top: -50px;
+        z-index: 1;
+    }
+    .profile-edit-img-sub2 {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    .AddNewStaff-body {
+        padding-bottom: 90px;
+    }
+    .add-staff-page-btn-main {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .allows {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .button-link-main {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .Already {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .form-flex-sub-login {
+        padding-bottom: 10px;
+    }
+    .welcome-text {
+        font-size: 30px;
+        line-height: 40px;
+    }
+}
+@media (max-width:425px) {
+    .checkbox-login {
+        padding-bottom: 0;
+        flex-direction: column;
+        gap: 8px;
+    }
+}

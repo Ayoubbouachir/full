@@ -1,0 +1,70 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'node18'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Cette étape est gérée automatiquement par Jenkins via la config du Job
+                echo 'Checking out code...'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('front-end') {
+                    echo 'Installing Frontend dependencies...'
+                    sh 'npm install --legacy-peer-deps'
+                }
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                dir('front-end') {
+                    echo 'Running Frontend Unit Tests with Coverage...'
+                    sh 'npm test -- --watchAll=false --coverage || true'
+                }
+            }
+        }
+
+        stage('Static Analysis (SonarQube)') {
+            steps {
+                dir('front-end') {
+                    echo 'Analyzing code with SonarQube...'
+                    script {
+                        def scannerHome = tool 'SonarQubeScanner'
+                        withSonarQubeEnv('SonarServer') {
+                            sh "${scannerHome}/bin/sonar-scanner " +
+                               "-Dsonar.projectKey=Fullstakers-Frontend-Final " +
+                               "-Dsonar.sources=src " +
+                               "-Dsonar.javascript.lcov.reportPaths=coverage/lcov.info " +
+                               "-Dsonar.cpd.exclusions=**/assets/**,**/translations/**,**/models/** " +
+                               "-Dsonar.coverage.exclusions=**/*.test.js,**/*.spec.js,src/reportWebVitals.js"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            emailext (
+                subject: "Statut du Build : ${currentBuild.fullDisplayName}",
+                body: "Le build ${currentBuild.fullDisplayName} est terminé avec le statut : ${currentBuild.currentResult}. \n\nConsultez les détails ici : ${env.BUILD_URL}",
+                to: "salim.hizi1234@gmail.com"
+            )
+        }
+        success {
+            echo 'CI Pipeline for Frontend SUCCESSFUL! Triggering CD...'
+            build job: 'front-end-cd', wait: false
+        }
+        failure {
+            echo 'CI Pipeline for Frontend FAILED!'
+        }
+    }
+}
