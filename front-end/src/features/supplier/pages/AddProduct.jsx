@@ -69,7 +69,7 @@ const SupplierAddProduct = () => {
                 const formDataUpload = new FormData();
                 formDataUpload.append('image', imageFile);
 
-                const uploadResponse = await fetch('http://localhost:3100/products/upload', {
+                const uploadResponse = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/upload', {
                     method: 'POST',
                     body: formDataUpload,
                 });
@@ -89,7 +89,7 @@ const SupplierAddProduct = () => {
                 imagePUrl: imageUrl,
                 supplierId: user._id || user.id // Send the supplier ID
             };
-            const response = await fetch('http://localhost:3100/products', {
+            const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),

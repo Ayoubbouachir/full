@@ -17,7 +17,7 @@ function MyOrders() {
         const userEmail = user.email || user.userEmail;
 
         setLoading(true);
-        fetch(`http://localhost:3100/orders/FindAll?userEmail=${userEmail}`)
+        fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/orders/FindAll?userEmail=${userEmail}`)
             .then(res => res.json())
             .then(data => {
                 const sorted = Array.isArray(data) ? data.sort((a, b) => new Date(b.dateArrivage) - new Date(a.dateArrivage)) : [];
@@ -38,7 +38,7 @@ function MyOrders() {
         if (!window.confirm('Are you sure you want to cancel this order?')) return;
 
         try {
-            const response = await fetch(`http://localhost:3100/orders/Delete/${orderId}`, {
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/orders/Delete/${orderId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {

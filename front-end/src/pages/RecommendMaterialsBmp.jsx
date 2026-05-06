@@ -6,7 +6,7 @@ import './AIFeatures.css';
 import './RecommendMaterialsBmp.css';
 import '../components/AIDashboard/AIDashboard.css';
 
-const PRODUCTS_API = 'http://localhost:3100/products/FindAll';
+const PRODUCTS_API = 'https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/FindAll';
 
 function addDays(date, days) {
   const d = new Date(date);

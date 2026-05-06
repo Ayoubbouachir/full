@@ -50,7 +50,7 @@ const ChatBotArtisan = () => {
         setShowSuggestions(false);
 
         try {
-            const res = await fetch('http://127.0.0.1:3100/ai-assistant/chat/artisan', {
+            const res = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/ai-assistant/chat/artisan', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: text }),

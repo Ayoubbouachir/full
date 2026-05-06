@@ -35,7 +35,7 @@ const EngineerCalendar = () => {
 
     useEffect(() => {
         fetchProjects();
-        fetch('http://localhost:3100/users/FindAll')
+        fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/users/FindAll')
             .then(res => res.json())
             .then(data => setAllUsers(data))
             .catch(err => console.error("Error fetching all users:", err));
@@ -49,7 +49,7 @@ const EngineerCalendar = () => {
 
     const fetchProjects = async () => {
         try {
-            const response = await fetch('http://localhost:3100/projects/FindAll');
+            const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects/FindAll');
             const data = await response.json();
             setProjects(data);
             setLoading(false);
@@ -109,7 +109,7 @@ const EngineerCalendar = () => {
     const handleDelete = async () => {
         if (!selectedProject || !window.confirm('Are you sure you want to delete this project?')) return;
         try {
-            const response = await fetch(`http://localhost:3100/projects/Delete/${selectedProject._id}`, {
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects/Delete/${selectedProject._id}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
@@ -134,7 +134,7 @@ const EngineerCalendar = () => {
             });
 
             try {
-                const uploadRes = await fetch('http://localhost:3100/projects/upload', {
+                const uploadRes = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects/upload', {
                     method: 'POST',
                     body: uploadFormData
                 });
@@ -161,7 +161,7 @@ const EngineerCalendar = () => {
         // If EDITING, save immediately
         if (selectedProject) {
             try {
-                const response = await fetch(`http://localhost:3100/projects/Update/${selectedProject._id}`, {
+                const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects/Update/${selectedProject._id}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -184,7 +184,7 @@ const EngineerCalendar = () => {
 
         // If NEW project, create and redirect to tasks
         try {
-            const response = await fetch('http://localhost:3100/projects', {
+            const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -223,7 +223,7 @@ const EngineerCalendar = () => {
                     artisanIds: selectedArtisans,
                     status: 'pending'
                 };
-                const response = await fetch('http://localhost:3100/projects', {
+                const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(finalPayload)
@@ -235,7 +235,7 @@ const EngineerCalendar = () => {
                 }
             } else {
                 // If EDITING, just update artisanIds
-                const response = await fetch(`http://localhost:3100/projects/Update/${createdProjectId}`, {
+                const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects/Update/${createdProjectId}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ artisanIds: selectedArtisans })

@@ -23,7 +23,7 @@ function ProductDetail() {
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
         if (id) {
-            fetch(`http://localhost:3100/products/Find/${id}`)
+            fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/Find/${id}`)
                 .then(res => res.json())
                 .then(data => {
                     setProduct(data);
@@ -55,7 +55,7 @@ function ProductDetail() {
 
         setSubmitting(true);
         try {
-            const response = await fetch(`http://localhost:3100/products/AddReview/${product._id}`, {
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/AddReview/${product._id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -90,7 +90,7 @@ function ProductDetail() {
         }
 
         try {
-            const response = await fetch(`http://localhost:3100/products/ToggleLikeReview/${product._id}`, {
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/ToggleLikeReview/${product._id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -175,7 +175,7 @@ function ProductDetail() {
                                                                 const sRating = Number(s);
                                                                 setRating(sRating);
 
-                                                                fetch(`http://localhost:3100/products/AddReview/${product._id}`, {
+                                                                fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/AddReview/${product._id}`, {
                                                                     method: 'POST',
                                                                     headers: { 'Content-Type': 'application/json' },
                                                                     body: JSON.stringify({

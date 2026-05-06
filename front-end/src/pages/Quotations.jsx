@@ -41,7 +41,7 @@ function Quotations() {
 
             const role = (currentUser.role === 'Worker' || currentUser.role === 'Artisan' || currentUser.role === 'Engineer') ? 'worker' : 'client';
 
-            const response = await fetch(`http://localhost:3100/quotations/${role}/${currentUser._id}`);
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/quotations/${role}/${currentUser._id}`);
             const data = await response.json();
             setQuotations(data);
             setLoading(false);
@@ -56,7 +56,7 @@ function Quotations() {
         try {
             const finalPrice = formData.items.reduce((sum, item) => sum + (parseFloat(item.total) || 0), 0);
             const isEdit = formData._id;
-            const url = isEdit ? `http://localhost:3100/quotations/${formData._id}` : 'http://localhost:3100/quotations';
+            const url = isEdit ? `https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/quotations/${formData._id}` : 'https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/quotations';
             const method = isEdit ? 'PATCH' : 'POST';
 
             const response = await fetch(url, {
@@ -102,7 +102,7 @@ function Quotations() {
     const handleDeleteQuotation = async (id) => {
         if (!window.confirm('Are you sure you want to delete this quotation?')) return;
         try {
-            const response = await fetch(`http://localhost:3100/quotations/${id}`, {
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/quotations/${id}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
@@ -156,7 +156,7 @@ function Quotations() {
 
     const updateStatus = async (quoId, status) => {
         try {
-            const response = await fetch(`http://localhost:3100/quotations/${quoId}/status`, {
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/quotations/${quoId}/status`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status })

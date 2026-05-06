@@ -8,7 +8,7 @@ function Project() {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	useEffect(() => {
-		fetch('http://localhost:3100/projects/FindAll')
+		fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects/FindAll')
 			.then(res => res.json())
 			.then(data => {
 				setProjects(data);

@@ -20,7 +20,7 @@ function Produits() {
 	}, []);
 
 	useEffect(() => {
-		fetch('http://localhost:3100/products/FindAll')
+		fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/FindAll')
 			.then(res => res.json())
 			.then(data => {
 				setProducts(data);
@@ -204,7 +204,7 @@ function Produits() {
 																			// Save/Update rating ONLY
 																			setSubmittingRating(prev => ({ ...prev, [product._id]: true }));
 
-																			fetch(`http://localhost:3100/products/AddReview/${product._id}`, {
+																			fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/AddReview/${product._id}`, {
 																				method: 'POST',
 																				headers: { 'Content-Type': 'application/json' },
 																				body: JSON.stringify({

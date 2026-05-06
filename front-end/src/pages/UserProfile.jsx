@@ -40,7 +40,7 @@ const UserProfile = () => {
     const handleSave = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3100/users/Update/${user._id}`, {
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/users/Update/${user._id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(editData),

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import './AIFeatures.css';
 import './ProjectClustering.css';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:3100';
+const API_BASE = process.env.REACT_APP_API_URL || 'https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net';
 
 const ProjectClustering = () => {
   const navigate = useNavigate();

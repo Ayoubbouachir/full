@@ -5,7 +5,7 @@ function Employee() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:3100/users/FindAll')
+        fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/users/FindAll')
             .then(res => res.json())
             .then(data => {
                 // Filter users with roles that count as staff (Worker, Engineer, Delivery, etc.)

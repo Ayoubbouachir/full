@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './PlanAnalysis.css';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3100';
+const API_BASE = process.env.REACT_APP_API_URL || 'https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net';
 
 /* ── Image-aware AI plan analysis (computer vision simulation) ── */
 

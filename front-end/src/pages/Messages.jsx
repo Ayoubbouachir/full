@@ -29,7 +29,7 @@ function Messages() {
 
         const fetchConversations = async () => {
             try {
-                const response = await fetch('http://localhost:3100/messages/conversations/' + currentUser._id);
+                const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/messages/conversations/' + currentUser._id);
                 const data = await response.json();
                 setConversations(data);
                 setLoading(false);
@@ -51,7 +51,7 @@ function Messages() {
         if (!currentUser) return;
 
         console.log('🔌 Connecting to messages socket...');
-        const socket = io('http://localhost:3100', {
+        const socket = io('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net', {
             transports: ['websocket'],
             reconnectionAttempts: 5
         });
@@ -88,7 +88,7 @@ function Messages() {
             console.log('🔄 Refreshing conversation list...');
             const fetchConversations = async () => {
                 try {
-                    const response = await fetch('http://localhost:3100/messages/conversations/' + currentUser._id);
+                    const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/messages/conversations/' + currentUser._id);
                     const data = await response.json();
                     setConversations(data);
                 } catch (error) {
@@ -113,7 +113,7 @@ function Messages() {
         if (!currentUser || !otherUserId) return;
 
         try {
-            const response = await fetch(`http://localhost:3100/messages/history/${currentUser._id}/${otherUserId}`);
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/messages/history/${currentUser._id}/${otherUserId}`);
             const data = await response.json();
             setMessages(data);
         } catch (error) {

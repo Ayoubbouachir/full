@@ -7,7 +7,7 @@ import React, { useState, useRef, useCallback } from 'react';
 
 const API_BASE =
   (typeof process !== 'undefined' && process.env.REACT_APP_API_URL) ||
-  'http://localhost:3100';
+  'https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net';
 
 const PHASE_COLORS = {
   terrassement: '#8B5E3C',

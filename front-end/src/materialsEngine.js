@@ -116,7 +116,7 @@ const CATALOGUE = {
 // ─── Fonction de Scraping Intégrée (Appel Backend) ──────────────────────────
 export async function fetchLivePrices(materialName) {
     try {
-        const response = await fetch(`http://localhost:3100/ai-assistant/scrape-web?query=${encodeURIComponent(materialName)}`);
+        const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/ai-assistant/scrape-web?query=${encodeURIComponent(materialName)}`);
         if (!response.ok) return [];
         return await response.json();
     } catch (error) {

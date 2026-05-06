@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import VoiceInput from '../components/VoiceInput'; // Intégration Saisie Vocale
 import FaceAuth from '../components/FaceAuth/FaceAuth'; // Intégration Face ID
 import MapPicker from '../components/MapPicker'; // Map pour position
+import API_BASE_URL from '../api.config';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -99,7 +100,7 @@ const Register = () => {
 
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3100/auth/register', {
+            const response = await fetch(`${API_BASE_URL}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

@@ -4,7 +4,7 @@ import EmptyState from '../../components/marketplace/EmptyState';
 import { LoadingCards } from '../../components/marketplace/LoadingCard';
 import './Marketplace.css';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:3100';
+const API_BASE = process.env.REACT_APP_API_URL || 'https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net';
 
 export default function MyOffersPage() {
   const [offers, setOffers] = useState([]);

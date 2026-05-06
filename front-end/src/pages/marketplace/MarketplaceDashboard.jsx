@@ -4,9 +4,10 @@ import RequestCard from '../../components/marketplace/RequestCard';
 import EmptyState from '../../components/marketplace/EmptyState';
 import { LoadingCards } from '../../components/marketplace/LoadingCard';
 import { useMarketplaceNotifications } from '../../hooks/useMarketplaceNotifications';
+import API_BASE_URL from '../../api.config';
 import './Marketplace.css';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:3100';
+const API_BASE = process.env.REACT_APP_API_URL || API_BASE_URL;
 
 export default function MarketplaceDashboard() {
   const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;

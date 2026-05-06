@@ -52,7 +52,7 @@ const AIRoutePredictor = () => {
 
         const fetchUsersData = async () => {
             try {
-                const response = await fetch('http://localhost:3100/users/FindAll');
+                const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/users/FindAll');
                 const data = await response.json();
                 setUsers(data.filter(u => u.address && u.address.length > 3));
             } catch (error) {

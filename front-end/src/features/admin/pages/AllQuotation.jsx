@@ -5,7 +5,7 @@ function AllQuotation() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:3100/orders/FindAll')
+        fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/orders/FindAll')
             .then(res => res.json())
             .then(data => {
                 setOrders(data);

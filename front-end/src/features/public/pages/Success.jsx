@@ -59,7 +59,7 @@ function Success() {
     const sendInvoice = async (userEmail, userName, items, statusLabel) => {
         setSendingInvoice(true);
         try {
-            const response = await fetch('http://localhost:3100/payments/send-invoice', {
+            const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/payments/send-invoice', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

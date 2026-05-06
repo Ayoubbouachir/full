@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import API_BASE_URL from '../api.config';
 
-const API_BASE = 'http://127.0.0.1:3100';
+const API_BASE = API_BASE_URL;
 const MODEL_URL_LOCAL = process.env.PUBLIC_URL + '/models';
 const MODEL_URL_CDN = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@master/weights';
 

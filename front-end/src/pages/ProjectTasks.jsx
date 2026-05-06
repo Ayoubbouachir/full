@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ProjectTasks.css';
 
-const API_BASE = 'http://localhost:3100';
+const API_BASE = 'https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net';
 
 const CONSTRUCTION_SPECIALITIES = [
     "Maçonnerie", "Plomberie", "Électricité", "Menuiserie", "Peinture", 

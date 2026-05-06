@@ -3,9 +3,10 @@ import RequestCard from '../../components/marketplace/RequestCard';
 import FilterBar from '../../components/marketplace/FilterBar';
 import EmptyState from '../../components/marketplace/EmptyState';
 import { LoadingCards } from '../../components/marketplace/LoadingCard';
+import API_BASE_URL from '../../api.config';
 import './Marketplace.css';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:3100';
+const API_BASE = process.env.REACT_APP_API_URL || API_BASE_URL;
 
 export default function AvailableRequestsPage() {
   const [requests, setRequests] = useState([]);

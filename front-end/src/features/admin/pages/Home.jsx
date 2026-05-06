@@ -20,8 +20,8 @@ function Home() {
         const fetchData = async () => {
             try {
                 const [usersRes, ordersRes] = await Promise.all([
-                    fetch('http://localhost:3100/users/FindAll').then(res => res.json()),
-                    fetch('http://localhost:3100/orders/FindAll').then(res => res.json())
+                    fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/users/FindAll').then(res => res.json()),
+                    fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/orders/FindAll').then(res => res.json())
                 ]);
 
                 const today = new Date().toDateString();

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './ChatAssistant.css';
+import API_BASE_URL from '../api.config';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:3100';
+const API_BASE = process.env.REACT_APP_API_URL || API_BASE_URL;
 const SESSION_KEY = 'fullstakers_assistant_session';
 
 const WELCOME_MESSAGE =

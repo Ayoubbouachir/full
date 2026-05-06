@@ -21,7 +21,7 @@ const ManageProducts = () => {
 
     const fetchSupplierProducts = async (supplierId) => {
         try {
-            const response = await fetch(`http://localhost:3100/products/BySupplier/${supplierId}`);
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/BySupplier/${supplierId}`);
             if (response.ok) {
                 const data = await response.json();
                 setProducts(data);
@@ -36,7 +36,7 @@ const ManageProducts = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
-                const response = await fetch(`http://localhost:3100/products/Delete/${id}`, {
+                const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/Delete/${id}`, {
                     method: 'DELETE',
                 });
                 if (response.ok) {
@@ -63,7 +63,7 @@ const ManageProducts = () => {
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3100/products/Update/${editingProduct._id}`, {
+            const response = await fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/products/Update/${editingProduct._id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

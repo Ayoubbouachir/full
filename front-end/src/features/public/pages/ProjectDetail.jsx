@@ -10,7 +10,7 @@ function ProjectDetail() {
 		const params = new URLSearchParams(window.location.search);
 		const id = params.get('id');
 		if (id) {
-			fetch(`http://localhost:3100/projects/Find/${id}`)
+			fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects/Find/${id}`)
 				.then(res => res.json())
 				.then(data => {
 					setProject(data);
@@ -18,7 +18,7 @@ function ProjectDetail() {
 						setActiveImage(data.maquettes[0]);
 					}
 					if (data.idUserEng) {
-						fetch(`http://localhost:3100/users/Find/${data.idUserEng}`)
+						fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/users/Find/${data.idUserEng}`)
 							.then(res => res.json())
 							.then(userData => setEngineer(userData))
 							.catch(err => console.error("Error fetching engineer:", err));

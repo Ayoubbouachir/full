@@ -34,7 +34,7 @@ function TeamDetail() {
 		}
 
 		if (id) {
-			fetch(`http://localhost:3100/users/Find/${id}`)
+			fetch(`https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/users/Find/${id}`)
 				.then(res => res.json())
 				.then(data => {
 					setMember(data);
@@ -92,7 +92,7 @@ function TeamDetail() {
 		console.log('Current User ID:', currentUser._id);
 		console.log('Profile/Worker ID:', id);
 
-		const socket = io('http://localhost:3100', {
+		const socket = io('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net', {
 			transports: ['websocket'],
 			reconnection: true,
 			reconnectionDelay: 1000,
@@ -210,7 +210,7 @@ function TeamDetail() {
 		};
 
 		try {
-			const res = await fetch('http://localhost:3100/reservations', {
+			const res = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/reservations', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(payload)

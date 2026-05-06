@@ -33,7 +33,7 @@ const EngineerProjectForm = () => {
                     uploadFormData.append('images', file);
                 });
 
-                const uploadRes = await fetch('http://localhost:3100/projects/upload', {
+                const uploadRes = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects/upload', {
                     method: 'POST',
                     body: uploadFormData
                 });
@@ -50,7 +50,7 @@ const EngineerProjectForm = () => {
                 maquettes: currentMaquettes,
                 idUserEng: user ? user._id : null
             };
-            const response = await fetch('http://localhost:3100/projects', {
+            const response = await fetch('https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net/projects', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),

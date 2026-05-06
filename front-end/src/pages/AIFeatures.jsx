@@ -6,7 +6,7 @@ import './AIFeatures.css';
 
 import { useNavigate } from 'react-router-dom';
 
-const API_BASE = 'http://127.0.0.1:3100';
+const API_BASE = 'https://fulll-aadvh5h7hrhmdye2.francecentral-01.azurewebsites.net';
 
 const AIFeatures = () => {
     const { t } = useTranslation();
