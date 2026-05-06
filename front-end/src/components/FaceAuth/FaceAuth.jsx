@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import API_BASE_URL from '../api.config';
+import API_BASE_URL from '../../api.config';
 
 const API_BASE = API_BASE_URL;
 const MODEL_URL_LOCAL = process.env.PUBLIC_URL + '/models';
