@@ -3,7 +3,7 @@ import RequestCard from '../../components/marketplace/RequestCard';
 import FilterBar from '../../components/marketplace/FilterBar';
 import EmptyState from '../../components/marketplace/EmptyState';
 import { LoadingCards } from '../../components/marketplace/LoadingCard';
-import API_BASE_URL from '../../api.config';
+import API_BASE_URL from '../../apiConfig';
 import './Marketplace.css';
 
 const API_BASE = process.env.REACT_APP_API_URL || API_BASE_URL;
